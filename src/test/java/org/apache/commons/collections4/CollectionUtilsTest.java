@@ -989,10 +989,13 @@ public class CollectionUtilsTest extends MockTestCase {
         expected.put("oneKey", "one");
 
         final Map<String, String> found = new HashMap<>();
-        Map.Entry<String, String> entry = CollectionUtils.get(expected, 0);
-        found.put(entry.getKey(), entry.getValue());
-        entry = CollectionUtils.get(expected, 1);
-        found.put(entry.getKey(), entry.getValue());
+        Map.Entry<String, String> entry1 = CollectionUtils.get(expected, 0);
+        found.put(entry1.getKey(), entry1.getValue());
+        Map.Entry<String, String> entry2;
+        do {
+            entry2 = CollectionUtils.get(expected, 1);
+        } while (entry1.equals(entry2));
+        found.put(entry2.getKey(), entry2.getValue());
         assertEquals(expected, found);
 
         // Map index out of range
