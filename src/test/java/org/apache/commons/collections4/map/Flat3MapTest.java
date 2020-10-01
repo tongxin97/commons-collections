@@ -352,9 +352,10 @@ public class Flat3MapTest<K, V> extends AbstractIterableMapTest<K, V> {
         final Map.Entry<K, V> mapEntry1 = it.next();
         final Map.Entry<K, V> mapEntry2 = it.next();
         final Map.Entry<K, V> mapEntry3 = it.next();
+        String removedValue = mapEntry3.getValue().toString();
         it.remove();
         assertEquals(2, map.size());
-        switch (mapEntry3.toString()) {
+        switch (removedValue) {
             case "one":
                 assertEquals(null, map.get("A"));
                 assertEquals("two", map.get("B"));
@@ -371,7 +372,7 @@ public class Flat3MapTest<K, V> extends AbstractIterableMapTest<K, V> {
                 assertEquals(null, map.get("C"));
                 break;
             default:
-                fail("Invalid entry")
+                fail("Invalid map entry: " + removedValue);
         }
     }
 
